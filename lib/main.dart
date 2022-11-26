@@ -1,66 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
+import 'routes/app_routes.dart';
+
+import 'core/utils/constants.dart';
+import 'routes/app_pages.dart';
+
+import 'package:ximno/app/modules/home/home_binding.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const XimnoApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class XimnoApp extends StatelessWidget {
+  const XimnoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+    return GetMaterialApp(
+      title: Constants.appName,
+      initialRoute: AppRoutes.home,
+      initialBinding: HomeBinding(),
+      theme: ThemeData(primarySwatch: Colors.blue),
+      getPages: AppPages.list,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
